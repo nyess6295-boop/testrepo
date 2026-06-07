@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FCHS CS Certification — Figma Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #1e1e1e;
+  min-height: 100vh;
+  overflow-x: auto;
+}
+
+/* ── FIGMA TOOLBAR ── */
+.figma-toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  height: 48px;
+  background: #2c2c2c;
+  border-bottom: 1px solid #3a3a3a;
+  display: flex; align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  font-size: 12px;
+  color: #ccc;
+}
+.fig-logo {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #FF7262 0%, #F24E1E 40%, #A259FF 70%, #1ABCFE 100%);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+.fig-breadcrumb { color: #999; }
+.fig-breadcrumb strong { color: #fff; font-weight: 500; }
+.fig-sep { color: #555; margin: 0 2px; }
+.fig-tools { display: flex; gap: 2px; margin-left: 12px; }
+.fig-tool {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  cursor: default;
+  color: #aaa;
+  transition: background 0.15s;
+}
+.fig-tool:hover, .fig-tool.active { background: #3d3d3d; color: #fff; }
+.fig-pages {
+  margin-left: auto;
+  display: flex; gap: 6px; align-items: center;
+}
+.fig-page-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: default;
+  color: #aaa;
+}
+.fig-page-btn.active { background: #3d3d3d; color: #fff; }
+.fig-share-btn {
+  background: #5B6AD0;
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-left: 8px;
+}
+.fig-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C8102E, #6d0919);
+  font-size: 11px;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+/* ── CANVAS ── */
+.canvas {
+  padding: 80px 60px 100px;
+  min-width: max-content;
+}
+
+/* ── SECTION HEADER LABEL ── */
+.canvas-section-label {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  margin-left: 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── ROW LAYOUT ── */
+.frames-row {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 80px;
+}
+
+/* ── FIGMA FRAME WRAPPER ── */
+.frame-block { display: flex; flex-direction: column; align-items: flex-start; }
+.frame-label {
+  font-size: 11px;
+  color: #777;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 400;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+.frame-label strong { color: #aaa; font-weight: 500; }
+.frame-outer {
+  outline: 1px solid #444;
+  outline-offset: 1px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+/* Frame corner handles */
+.frame-outer::before, .frame-outer::after {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  width: 8px; height: 8px;
+  background: #1e1e1e;
+  border: 1.5px solid #5b8def;
+}
+.frame-outer::before { top: -4px; left: -4px; }
+.frame-outer::after  { bottom: -4px; right: -4px; }
+
+/* ── SCALING CONTAINERS ── */
+/* DESKTOP: inner 1440×900, shown at 55.5% → 799×499 */
+.desktop-wrapper {
+  width: 800px;
+  height: 500px;
+  overflow: hidden;
+}
+.desktop-inner {
+  width: 1440px;
+  height: 900px;
+  transform: scale(0.555);
+  transform-origin: top left;
+  background: #0b0b0b;
+}
+
+/* MOBILE: inner 390×844, shown at 65% → 254×549 */
+.mobile-wrapper {
+  width: 254px;
+  height: 549px;
+  overflow: hidden;
+}
+.mobile-inner {
+  width: 390px;
+  height: 844px;
+  transform: scale(0.651);
+  transform-origin: top left;
+  background: #0b0b0b;
+}
+
+/* ─────────────────────────────── */
+/* WEBSITE DESIGN — SHARED TOKENS */
+/* ─────────────────────────────── */
+.w { --red:#C8102E; --red2:#e8152f; --bg:#0b0b0b; --dark:#111111; --card:#161616;
+     --border:rgba(255,255,255,0.07); --muted:rgba(255,255,255,0.48); --white:#ffffff;
+     font-family:'Plus Jakarta Sans',sans-serif; -webkit-font-smoothing:antialiased;
+     background:var(--bg); color:var(--white); }
+
+/* ── DESKTOP NAV ── */
+.w .d-nav {
+  height: 64px; background:var(--dark);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px;
+  flex-shrink:0;
+}
+.w .d-nav-logo { display:flex; align-items:center; gap:12px; }
+.w .d-logo-ring {
+  width:38px; height:38px; border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.5);
+  display:flex; align-items:center; justify-content:center;
+}
+.w .d-logo-ring svg { width:18px; height:18px; }
+.w .d-logo-text {
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  letter-spacing:0.1em; color:#fff;
+}
+.w .d-nav-links { display:flex; align-items:center; gap:4px; }
+.w .d-link {
+  padding:7px 16px; font-size:14px; font-weight:400;
+  color:rgba(255,255,255,0.6); border-radius:6px;
+}
+.w .d-apply {
+  background:var(--red); color:#fff !important;
+  font-weight:600; border-radius:6px;
+  padding:7px 20px; font-size:14px;
+}
+
+/* ── DESKTOP HERO ── */
+.w .d-hero {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:60px 48px 0;
+  text-align:center; flex:1;
+  position:relative; overflow:hidden;
+}
+.w .d-hero-glow {
+  position:absolute; top:-180px; left:50%; transform:translateX(-50%);
+  width:900px; height:480px;
+  background:radial-gradient(ellipse, rgba(200,16,46,0.12) 0%, transparent 65%);
+  pointer-events:none;
+}
+.w .d-hero-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(200,16,46,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,16,46,0.04) 1px, transparent 1px);
+  background-size:72px 72px;
+  pointer-events:none;
+}
+.w .d-school-tag {
+  font-size:12px; letter-spacing:0.3em; text-transform:uppercase;
+  color:rgba(255,255,255,0.45); font-weight:400; margin-bottom:18px;
+  position:relative;
+}
+.w .d-h1 {
+  font-family:'Bebas Neue',sans-serif; line-height:0.88;
+  letter-spacing:0.03em; position:relative;
+}
+.w .d-h1-white { font-size:148px; color:#fff; display:block; }
+.w .d-h1-red   { font-size:148px; color:var(--red); display:block; }
+.w .d-ctas {
+  display:flex; gap:14px; margin-top:32px; position:relative;
+}
+.w .d-btn-fill {
+  font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.12em;
+  padding:13px 36px; background:var(--red); color:#fff; border-radius:4px;
+}
+.w .d-btn-ghost {
+  font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.12em;
+  padding:12px 32px; border:1.5px solid rgba(255,255,255,0.28);
+  color:rgba(255,255,255,0.75); border-radius:4px;
+}
+
+/* ── DESKTOP STATS BAR ── */
+.w .d-stats {
+  display:flex; width:100%;
+  border-top:1px solid var(--border);
+  background:rgba(17,17,17,0.9);
+  margin-top:auto;
+}
+.w .d-stat {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  gap:16px; padding:20px 16px;
+  border-right:1px solid var(--border);
+}
+.w .d-stat:last-child { border-right:none; }
+.w .d-stat-val {
+  font-family:'Bebas Neue',sans-serif; font-size:30px;
+  letter-spacing:0.04em; line-height:1; color:#fff;
+}
+.w .d-stat-val em { color:var(--red); font-style:normal; }
+.w .d-stat-lbl { font-size:11px; color:var(--muted); line-height:1.4; max-width:80px; }
+
+/* ── DESKTOP COURSES SECTION ── */
+.w .d-courses {
+  padding:64px 64px 0;
+  background:var(--bg);
+}
+.w .d-eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--red); font-weight:500; margin-bottom:16px;
+}
+.w .d-eyebrow::before {
+  content:''; display:block; width:24px; height:1.5px; background:var(--red);
+}
+.w .d-section-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:58px; letter-spacing:0.04em; line-height:0.92; color:#fff;
+  margin-bottom:8px;
+}
+.w .d-section-title em { color:var(--red); font-style:normal; }
+.w .d-section-sub {
+  font-size:15px; color:var(--muted); max-width:400px;
+  line-height:1.7; font-weight:300; margin-bottom:44px;
+}
+.w .d-cards {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border); border-radius:8px;
+  overflow:hidden;
+}
+.w .d-card {
+  background:var(--card); padding:36px 28px 40px;
+}
+.w .d-card-num {
+  font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+  color:rgba(255,255,255,0.22); margin-bottom:16px; font-weight:500;
+}
+.w .d-card-badge {
+  display:inline-block; padding:3px 10px;
+  background:var(--red); color:#fff;
+  font-size:10px; font-weight:600; letter-spacing:0.08em;
+  border-radius:3px; margin-bottom:16px;
+}
+.w .d-card-badge.ghost {
+  background:transparent; border:1px solid rgba(255,255,255,0.15);
+  color:var(--muted);
+}
+.w .d-card-title {
+  font-family:'Bebas Neue',sans-serif; font-size:24px;
+  letter-spacing:0.04em; line-height:1.1; margin-bottom:12px;
+}
+.w .d-card-desc {
+  font-size:13px; color:var(--muted); line-height:1.75; font-weight:300;
+}
+.w .d-card-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:20px; }
+.w .d-card-tag {
+  font-size:10px; color:rgba(255,255,255,0.28);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:2px 8px; border-radius:3px; letter-spacing:0.04em;
+}
+
+/* ── MOBILE NAV ── */
+.w .m-nav {
+  height:56px; background:var(--dark);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 24px; flex-shrink:0;
+}
+.w .m-logo { display:flex; align-items:center; gap:9px; }
+.w .m-logo-ring {
+  width:30px; height:30px; border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.4);
+  display:flex; align-items:center; justify-content:center;
+}
+.w .m-logo-ring svg { width:14px; height:14px; }
+.w .m-logo-text {
+  font-family:'Bebas Neue',sans-serif; font-size:14px;
+  letter-spacing:0.08em; color:#fff;
+}
+.w .m-burger { display:flex; flex-direction:column; gap:4px; cursor:default; }
+.w .m-burger span {
+  display:block; width:20px; height:1.5px; background:rgba(255,255,255,0.7);
+}
+
+/* ── MOBILE HERO ── */
+.w .m-hero {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:40px 24px 0; text-align:center;
+  position:relative; overflow:hidden;
+}
+.w .m-glow {
+  position:absolute; top:-100px; left:50%; transform:translateX(-50%);
+  width:500px; height:300px;
+  background:radial-gradient(ellipse, rgba(200,16,46,0.15) 0%, transparent 65%);
+  pointer-events:none;
+}
+.w .m-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(200,16,46,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,16,46,0.05) 1px, transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+.w .m-school-tag {
+  font-size:9px; letter-spacing:0.28em; text-transform:uppercase;
+  color:rgba(255,255,255,0.4); margin-bottom:14px; position:relative;
+}
+.w .m-h1 {
+  font-family:'Bebas Neue',sans-serif; letter-spacing:0.03em;
+  line-height:0.88; position:relative;
+}
+.w .m-h1-white { font-size:80px; color:#fff; display:block; }
+.w .m-h1-red   { font-size:80px; color:var(--red); display:block; }
+.w .m-cta {
+  font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:0.12em;
+  padding:13px 0; width:100%; background:var(--red); color:#fff;
+  border-radius:6px; margin-top:28px; text-align:center; position:relative;
+}
+.w .m-ghost {
+  font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.1em;
+  padding:12px 0; width:100%;
+  border:1.5px solid rgba(255,255,255,0.25); color:rgba(255,255,255,0.65);
+  border-radius:6px; margin-top:10px; text-align:center; position:relative;
+}
+
+/* ── MOBILE STATS ── */
+.w .m-stats {
+  display:grid; grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--border);
+  background:rgba(17,17,17,0.95);
+  margin-top:auto;
+}
+.w .m-stat {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:18px 8px; border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.w .m-stat:nth-child(2n) { border-right:none; }
+.w .m-stat:nth-child(n+3) { border-bottom:none; }
+.w .m-s-val {
+  font-family:'Bebas Neue',sans-serif; font-size:24px;
+  letter-spacing:0.04em; color:#fff; line-height:1;
+}
+.w .m-s-val em { color:var(--red); font-style:normal; }
+.w .m-s-lbl { font-size:10px; color:var(--muted); margin-top:4px; }
+
+/* ── DESKTOP PERKS ── */
+.w .d-perks { padding:64px 64px 0; background:var(--bg); }
+.w .d-perks-grid {
+  display:grid; grid-template-columns:1.3fr 1fr; gap:48px;
+  align-items:start; margin-top:40px;
+}
+.w .d-perk-rows { display:flex; flex-direction:column; }
+.w .d-perk-row {
+  display:flex; gap:18px; align-items:flex-start;
+  padding:24px 0; border-bottom:1px solid var(--border);
+}
+.w .d-perk-row:first-child { border-top:1px solid var(--border); }
+.w .d-perk-icon {
+  width:38px; height:38px; flex-shrink:0;
+  background:rgba(200,16,46,0.1); border:1px solid rgba(200,16,46,0.2);
+  border-radius:8px; display:flex; align-items:center; justify-content:center;
+  font-size:17px;
+}
+.w .d-perk-title {
+  font-family:'Bebas Neue',sans-serif; font-size:20px;
+  letter-spacing:0.05em; margin-bottom:5px;
+}
+.w .d-perk-desc { font-size:13px; color:var(--muted); line-height:1.7; font-weight:300; }
+.w .d-cert-panel {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; padding:32px 28px;
+}
+.w .d-cert-panel-label {
+  font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--red); font-weight:500; margin-bottom:18px;
+}
+.w .d-cert-panel h3 {
+  font-family:'Bebas Neue',sans-serif; font-size:28px;
+  letter-spacing:0.04em; line-height:1.0; margin-bottom:20px;
+}
+.w .d-cert-badges {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+}
+.w .d-cert-badge {
+  aspect-ratio:1; background:var(--bg);
+  border:1px solid var(--border); border-radius:8px;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:16px 12px;
+}
+.w .d-badge-icon { font-size:26px; margin-bottom:8px; }
+.w .d-badge-name {
+  font-family:'Bebas Neue',sans-serif; font-size:13px;
+  letter-spacing:0.05em; line-height:1.2;
+}
+.w .d-badge-org { font-size:10px; color:var(--muted); margin-top:3px; }
+
+/* ── DESKTOP APPLY ── */
+.w .d-apply-section { padding:64px 64px 0; background:var(--bg); }
+.w .d-apply-layout {
+  display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  align-items:start; margin-top:40px;
+}
+.w .d-apply-left {}
+.w .d-teacher-card {
+  display:flex; gap:16px; align-items:center;
+  padding:24px; background:var(--card);
+  border:1px solid var(--border); border-radius:10px;
+  margin-bottom:24px;
+}
+.w .d-teacher-av {
+  width:54px; height:54px; border-radius:50%; flex-shrink:0;
+  background:linear-gradient(135deg,#C8102E,#6d0919);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  letter-spacing:0.04em;
+}
+.w .d-teacher-name {
+  font-family:'Bebas Neue',sans-serif; font-size:20px;
+  letter-spacing:0.05em; margin-bottom:3px;
+}
+.w .d-teacher-role { font-size:12px; color:var(--red); letter-spacing:0.08em; text-transform:uppercase; }
+.w .d-teacher-bio { font-size:12.5px; color:var(--muted); line-height:1.65; font-weight:300; margin-top:6px; }
+.w .d-info-chips { display:flex; flex-direction:column; gap:8px; }
+.w .d-chip {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 16px; background:var(--card);
+  border:1px solid var(--border); border-radius:7px;
+  font-size:12.5px; color:var(--muted);
+}
+.w .d-chip-icon { font-size:15px; flex-shrink:0; }
+
+/* Apply form panel */
+.w .d-form-panel {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; padding:36px 32px;
+}
+.w .d-form-label {
+  font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--red); font-weight:500; margin-bottom:10px;
+}
+.w .d-form-title {
+  font-family:'Bebas Neue',sans-serif; font-size:32px;
+  letter-spacing:0.04em; line-height:1.0; margin-bottom:6px;
+}
+.w .d-form-sub {
+  font-size:12.5px; color:var(--muted); margin-bottom:24px;
+  font-weight:300; line-height:1.6;
+}
+.w .d-field {
+  margin-bottom:14px;
+}
+.w .d-field-label {
+  font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+  color:rgba(255,255,255,0.38); font-weight:500; margin-bottom:6px;
+}
+.w .d-field-input {
+  width:100%; padding:11px 14px;
+  background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  border-radius:6px; font-size:13px; color:rgba(255,255,255,0.5);
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+.w .d-field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.w .d-submit {
+  width:100%; margin-top:6px;
+  font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.12em;
+  padding:13px; background:var(--red); color:#fff; border-radius:6px;
+  text-align:center;
+}
+
+/* ── MOBILE PERKS ── */
+.w .m-perks { padding:32px 20px 0; }
+.w .m-perk-rows { display:flex; flex-direction:column; margin-top:20px; }
+.w .m-perk-row {
+  display:flex; gap:14px; align-items:flex-start;
+  padding:18px 0; border-bottom:1px solid var(--border);
+}
+.w .m-perk-row:first-child { border-top:1px solid var(--border); }
+.w .m-perk-icon {
+  width:32px; height:32px; flex-shrink:0;
+  background:rgba(200,16,46,0.1); border:1px solid rgba(200,16,46,0.2);
+  border-radius:7px; display:flex; align-items:center; justify-content:center;
+  font-size:14px;
+}
+.w .m-perk-title {
+  font-family:'Bebas Neue',sans-serif; font-size:16px;
+  letter-spacing:0.05em; margin-bottom:4px;
+}
+.w .m-perk-desc { font-size:11px; color:var(--muted); line-height:1.65; font-weight:300; }
+.w .m-cert-strip {
+  margin-top:20px;
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.w .m-cert-badge {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:8px; padding:16px 12px;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.w .m-badge-icon { font-size:22px; margin-bottom:6px; }
+.w .m-badge-name {
+  font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.04em; line-height:1.2;
+}
+.w .m-badge-org { font-size:9px; color:var(--muted); margin-top:2px; }
+
+/* ── MOBILE APPLY ── */
+.w .m-apply { padding:32px 20px 0; }
+.w .m-teacher-card {
+  display:flex; gap:12px; align-items:center;
+  padding:18px; background:var(--card);
+  border:1px solid var(--border); border-radius:9px; margin-bottom:16px;
+}
+.w .m-teacher-av {
+  width:44px; height:44px; border-radius:50%; flex-shrink:0;
+  background:linear-gradient(135deg,#C8102E,#6d0919);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:15px;
+}
+.w .m-teacher-name {
+  font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.05em; margin-bottom:2px;
+}
+.w .m-teacher-role { font-size:9px; color:var(--red); letter-spacing:0.08em; text-transform:uppercase; }
+.w .m-form-panel {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:9px; padding:24px 18px; margin-top:16px;
+}
+.w .m-form-title {
+  font-family:'Bebas Neue',sans-serif; font-size:24px;
+  letter-spacing:0.04em; margin-bottom:4px;
+}
+.w .m-form-sub { font-size:11px; color:var(--muted); line-height:1.6; margin-bottom:18px; font-weight:300; }
+.w .m-field { margin-bottom:10px; }
+.w .m-field-label {
+  font-size:9px; letter-spacing:0.1em; text-transform:uppercase;
+  color:rgba(255,255,255,0.35); font-weight:500; margin-bottom:5px;
+}
+.w .m-field-input {
+  width:100%; padding:10px 12px;
+  background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  border-radius:5px; font-size:12px; color:rgba(255,255,255,0.4);
+}
+.w .m-submit {
+  width:100%; margin-top:4px;
+  font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.12em;
+  padding:12px; background:var(--red); color:#fff; border-radius:5px; text-align:center;
+}
+
+/* ── MOBILE COURSES (below fold) ── */
+.w .m-courses { padding:40px 24px 0; }
+.w .m-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--red); font-weight:500; margin-bottom:12px;
+}
+.w .m-eyebrow::before {
+  content:''; display:block; width:18px; height:1.5px; background:var(--red);
+}
+.w .m-sec-title {
+  font-family:'Bebas Neue',sans-serif; font-size:38px;
+  letter-spacing:0.04em; line-height:0.92; color:#fff; margin-bottom:24px;
+}
+.w .m-sec-title em { color:var(--red); font-style:normal; }
+.w .m-cards { display:flex; flex-direction:column; gap:1px;
+  background:var(--border); border:1px solid var(--border); border-radius:8px;
+  overflow:hidden;
+}
+.w .m-card { background:var(--card); padding:24px 20px; }
+.w .m-card-num {
+  font-size:9px; letter-spacing:0.2em; text-transform:uppercase;
+  color:rgba(255,255,255,0.22); margin-bottom:10px;
+}
+.w .m-card-badge {
+  display:inline-block; padding:2px 8px;
+  background:var(--red); color:#fff;
+  font-size:9px; font-weight:600; border-radius:2px; margin-bottom:10px;
+}
+.w .m-card-badge.ghost {
+  background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--muted);
+}
+.w .m-card-title {
+  font-family:'Bebas Neue',sans-serif; font-size:18px;
+  letter-spacing:0.04em; margin-bottom:8px;
+}
+.w .m-card-desc {
+  font-size:11px; color:var(--muted); line-height:1.7; font-weight:300;
+}
+</style>
+</head>
+<body>
+
+<!-- ── FIGMA TOOLBAR ── -->
+<div class="figma-toolbar">
+  <div class="fig-logo">🎨</div>
+  <span class="fig-breadcrumb"><strong>FCHS CS Certification</strong></span>
+  <span class="fig-sep">/</span>
+  <span class="fig-breadcrumb">Website Mockup</span>
+
+  <div class="fig-tools">
+    <div class="fig-tool active">↖</div>
+    <div class="fig-tool">⬚</div>
+    <div class="fig-tool active">✏️</div>
+    <div class="fig-tool">T</div>
+    <div class="fig-tool">⬡</div>
+  </div>
+
+  <div class="fig-pages" style="margin-left:auto">
+    <div class="fig-page-btn active">Page 1</div>
+    <div class="fig-page-btn">Components</div>
+    <div class="fig-share-btn">Share</div>
+    <div class="fig-avatar">FC</div>
+  </div>
+</div>
+
+<!-- ── CANVAS ── -->
+<div class="canvas">
+
+  <!-- ROW 1: HERO FRAMES -->
+  <div class="canvas-section-label">Hero — Desktop &amp; Mobile</div>
+  <div class="frames-row">
+
+    <!-- DESKTOP HERO FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Desktop</strong> / Hero — 1440 × 900</div>
+      <div class="frame-outer">
+        <div class="desktop-wrapper">
+          <div class="desktop-inner w" style="display:flex;flex-direction:column;">
+            <!-- Nav -->
+            <div class="d-nav">
+              <div class="d-nav-logo">
+                <div class="d-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="d-logo-text">CS INDUSTRY CERTIFICATION</span>
+              </div>
+              <div class="d-nav-links">
+                <span class="d-link">About</span>
+                <span class="d-link">Courses</span>
+                <span class="d-link">Perks</span>
+                <span class="d-link d-apply">Apply</span>
+              </div>
+            </div>
+            <!-- Hero -->
+            <div class="d-hero">
+              <div class="d-hero-glow"></div>
+              <div class="d-hero-grid"></div>
+              <p class="d-school-tag">Forsyth Central High School · Cumming, GA</p>
+              <h1 class="d-h1">
+                <span class="d-h1-white">COMPUTER</span>
+                <span class="d-h1-white">SCIENCE</span>
+                <span class="d-h1-red">PATHWAY</span>
+              </h1>
+              <div class="d-ctas">
+                <div class="d-btn-fill">EXPLORE OUR PATHWAY</div>
+                <div class="d-btn-ghost">VIEW CERTIFICATIONS</div>
+              </div>
+            </div>
+            <!-- Stats -->
+            <div class="d-stats">
+              <div class="d-stat">
+                <div class="d-stat-val">3</div>
+                <div class="d-stat-lbl">Sequenced Courses</div>
+              </div>
+              <div class="d-stat">
+                <div class="d-stat-val">4<em>+</em></div>
+                <div class="d-stat-lbl">Industry Certifications</div>
+              </div>
+              <div class="d-stat">
+                <div class="d-stat-val">TOP <em>6</em></div>
+                <div class="d-stat-lbl">STEM School in Georgia</div>
+              </div>
+              <div class="d-stat">
+                <div class="d-stat-val"><em>~</em>32</div>
+                <div class="d-stat-lbl">Nationally Certified</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE HERO FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Mobile</strong> / Hero — 390 × 844</div>
+      <div class="frame-outer">
+        <div class="mobile-wrapper">
+          <div class="mobile-inner w" style="display:flex;flex-direction:column;">
+            <!-- Nav -->
+            <div class="m-nav">
+              <div class="m-logo">
+                <div class="m-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="m-logo-text">CS INDUSTRY CERT</span>
+              </div>
+              <div class="m-burger">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+            <!-- Hero -->
+            <div class="m-hero">
+              <div class="m-glow"></div>
+              <div class="m-grid"></div>
+              <p class="m-school-tag">Forsyth Central High School</p>
+              <h1 class="m-h1">
+                <span class="m-h1-white">COMPUTER</span>
+                <span class="m-h1-white">SCIENCE</span>
+                <span class="m-h1-red">PATHWAY</span>
+              </h1>
+              <div class="m-cta">EXPLORE OUR PATHWAY</div>
+              <div class="m-ghost">VIEW CERTIFICATIONS</div>
+            </div>
+            <!-- Stats -->
+            <div class="m-stats">
+              <div class="m-stat">
+                <div class="m-s-val">3</div>
+                <div class="m-s-lbl">Courses</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-s-val">4<em>+</em></div>
+                <div class="m-s-lbl">Certifications</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-s-val">TOP <em>6</em></div>
+                <div class="m-s-lbl">In Georgia</div>
+              </div>
+              <div class="m-stat">
+                <div class="m-s-val"><em>~</em>32</div>
+                <div class="m-s-lbl">National</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /frames-row -->
+
+  <!-- ROW 2: COURSES FRAMES -->
+  <div class="canvas-section-label">Courses Section — Desktop &amp; Mobile</div>
+  <div class="frames-row">
+
+    <!-- DESKTOP COURSES FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Desktop</strong> / Courses — 1440 × 900</div>
+      <div class="frame-outer">
+        <div class="desktop-wrapper">
+          <div class="desktop-inner w" style="display:flex;flex-direction:column;">
+            <!-- Nav (compact repeat) -->
+            <div class="d-nav">
+              <div class="d-nav-logo">
+                <div class="d-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="d-logo-text">CS INDUSTRY CERTIFICATION</span>
+              </div>
+              <div class="d-nav-links">
+                <span class="d-link" style="color:#C8102E;font-weight:600;">Courses</span>
+                <span class="d-link">About</span>
+                <span class="d-link">Perks</span>
+                <span class="d-link d-apply">Apply</span>
+              </div>
+            </div>
+            <!-- Courses section -->
+            <div class="d-courses">
+              <div class="d-eyebrow">CS Pathway</div>
+              <div class="d-section-title">THE THREE-COURSE<br><em>SEQUENCE</em></div>
+              <div class="d-section-sub">Three sequenced courses that build real skills — and real credentials.</div>
+              <div class="d-cards">
+                <div class="d-card">
+                  <div class="d-card-num">Course 01</div>
+                  <span class="d-card-badge ghost">Foundations</span>
+                  <div class="d-card-title">Introduction to<br>Digital Technology</div>
+                  <p class="d-card-desc">Build your foundation in computing concepts, hardware, software applications, and digital citizenship.</p>
+                  <div class="d-card-tags">
+                    <span class="d-card-tag">Hardware</span>
+                    <span class="d-card-tag">Software</span>
+                    <span class="d-card-tag">Digital Citizenship</span>
+                  </div>
+                </div>
+                <div class="d-card">
+                  <div class="d-card-num">Course 02</div>
+                  <span class="d-card-badge">AP · College Credit</span>
+                  <div class="d-card-title">AP Computer Science<br>Principles</div>
+                  <p class="d-card-desc">Explore algorithms, data, the internet, and cybersecurity. Earn college credit with the AP exam.</p>
+                  <div class="d-card-tags">
+                    <span class="d-card-tag">Algorithms</span>
+                    <span class="d-card-tag">Data</span>
+                    <span class="d-card-tag">Cybersecurity</span>
+                    <span class="d-card-tag">AP Exam</span>
+                  </div>
+                </div>
+                <div class="d-card">
+                  <div class="d-card-num">Course 03</div>
+                  <span class="d-card-badge">AP · Java · Advanced</span>
+                  <div class="d-card-title">AP Computer Science A</div>
+                  <p class="d-card-desc">Object-oriented programming in Java — the standard for university CS and software engineering careers.</p>
+                  <div class="d-card-tags">
+                    <span class="d-card-tag">Java</span>
+                    <span class="d-card-tag">OOP</span>
+                    <span class="d-card-tag">Algorithms</span>
+                    <span class="d-card-tag">AP Exam</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE COURSES FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Mobile</strong> / Courses — 390 × 844</div>
+      <div class="frame-outer">
+        <div class="mobile-wrapper">
+          <div class="mobile-inner w" style="display:flex;flex-direction:column;">
+            <div class="m-nav">
+              <div class="m-logo">
+                <div class="m-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="m-logo-text">CS INDUSTRY CERT</span>
+              </div>
+              <div class="m-burger"><span></span><span></span><span></span></div>
+            </div>
+            <div class="m-courses">
+              <div class="m-eyebrow">CS Pathway</div>
+              <div class="m-sec-title">THREE-COURSE<br><em>SEQUENCE</em></div>
+              <div class="m-cards">
+                <div class="m-card">
+                  <div class="m-card-num">Course 01</div>
+                  <span class="m-card-badge ghost">Foundations</span>
+                  <div class="m-card-title">Introduction to Digital Technology</div>
+                  <p class="m-card-desc">Computing concepts, hardware, software, and digital citizenship fundamentals.</p>
+                </div>
+                <div class="m-card">
+                  <div class="m-card-num">Course 02</div>
+                  <span class="m-card-badge">AP · College Credit</span>
+                  <div class="m-card-title">AP Computer Science Principles</div>
+                  <p class="m-card-desc">Algorithms, data, internet, cybersecurity. Earn college credit with the AP exam.</p>
+                </div>
+                <div class="m-card">
+                  <div class="m-card-num">Course 03</div>
+                  <span class="m-card-badge">AP · Java · Advanced</span>
+                  <div class="m-card-title">AP Computer Science A</div>
+                  <p class="m-card-desc">Object-oriented Java programming — university-level CS and software engineering.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /frames-row -->
+
+  <!-- ROW 3: PERKS FRAMES -->
+  <div class="canvas-section-label">Perks Section — Desktop &amp; Mobile</div>
+  <div class="frames-row">
+
+    <!-- DESKTOP PERKS FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Desktop</strong> / Perks — 1440 × 900</div>
+      <div class="frame-outer">
+        <div class="desktop-wrapper">
+          <div class="desktop-inner w" style="display:flex;flex-direction:column;">
+            <div class="d-nav">
+              <div class="d-nav-logo">
+                <div class="d-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="d-logo-text">CS INDUSTRY CERTIFICATION</span>
+              </div>
+              <div class="d-nav-links">
+                <span class="d-link">About</span>
+                <span class="d-link">Courses</span>
+                <span class="d-link" style="color:#C8102E;font-weight:600;">Perks</span>
+                <span class="d-link d-apply">Apply</span>
+              </div>
+            </div>
+            <div class="d-perks">
+              <div class="d-eyebrow">Why Join</div>
+              <div class="d-section-title">THE PERKS OF<br><em>THIS PATHWAY</em></div>
+              <div class="d-section-sub">From competitions to college credit — here's what students actually gain.</div>
+              <div class="d-perks-grid">
+                <!-- Left: FBLA feature rows -->
+                <div>
+                  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:16px;">FUTURE BUSINESS LEADERS OF AMERICA</div>
+                  <div class="d-perk-rows">
+                    <div class="d-perk-row">
+                      <div class="d-perk-icon">🏅</div>
+                      <div>
+                        <div class="d-perk-title">Competitive Events</div>
+                        <p class="d-perk-desc">Compete at Regional, State, and National level in CS events. Real stakes, real recognition, and major resume fuel for college applications.</p>
+                      </div>
+                    </div>
+                    <div class="d-perk-row">
+                      <div class="d-perk-icon">👥</div>
+                      <div>
+                        <div class="d-perk-title">Leadership Development</div>
+                        <p class="d-perk-desc">Hold officer positions, run club events, and sharpen the communication and teamwork skills every employer wants to see.</p>
+                      </div>
+                    </div>
+                    <div class="d-perk-row">
+                      <div class="d-perk-icon">📋</div>
+                      <div>
+                        <div class="d-perk-title">College Application Edge</div>
+                        <p class="d-perk-desc">FBLA membership and awards demonstrate initiative beyond the classroom — a real differentiator on applications.</p>
+                      </div>
+                    </div>
+                    <div class="d-perk-row">
+                      <div class="d-perk-icon">🌐</div>
+                      <div>
+                        <div class="d-perk-title">National Network</div>
+                        <p class="d-perk-desc">Connect with students from across the country competing in business and technology. Relationships that outlast high school.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="font-size:12px;color:var(--muted);margin-top:18px;">Contact: <strong style="color:#fff;">Coach Lillie</strong> · Room 334</div>
+                </div>
+                <!-- Right: Cert panel -->
+                <div class="d-cert-panel">
+                  <div class="d-cert-panel-label">Industry Credentials</div>
+                  <h3>CREDENTIALS THAT<br>OPEN DOORS</h3>
+                  <div class="d-cert-badges">
+                    <div class="d-cert-badge">
+                      <div class="d-badge-icon">🎓</div>
+                      <div class="d-badge-name">AP College Credit</div>
+                      <div class="d-badge-org">College Board</div>
+                    </div>
+                    <div class="d-cert-badge">
+                      <div class="d-badge-icon">🏆</div>
+                      <div class="d-badge-name">STEM Certified</div>
+                      <div class="d-badge-org">Nationally Recognized</div>
+                    </div>
+                    <div class="d-cert-badge">
+                      <div class="d-badge-icon">🛡️</div>
+                      <div class="d-badge-name">CTAE Pathway</div>
+                      <div class="d-badge-org">Georgia State</div>
+                    </div>
+                    <div class="d-cert-badge">
+                      <div class="d-badge-icon">💼</div>
+                      <div class="d-badge-name">Career Ready</div>
+                      <div class="d-badge-org">Industry Validated</div>
+                    </div>
+                  </div>
+                  <!-- STEM mini-strip -->
+                  <div style="margin-top:20px;padding:16px;background:rgba(200,16,46,0.08);border:1px solid rgba(200,16,46,0.18);border-radius:8px;">
+                    <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">AdvancEd Certified · 2018</div>
+                    <div style="display:flex;gap:28px;">
+                      <div style="text-align:center;">
+                        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;">~32</div>
+                        <div style="font-size:10px;color:var(--muted);">Schools Nationwide</div>
+                      </div>
+                      <div style="text-align:center;">
+                        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;">6</div>
+                        <div style="font-size:10px;color:var(--muted);">In Georgia</div>
+                      </div>
+                      <div style="text-align:center;">
+                        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;">2018</div>
+                        <div style="font-size:10px;color:var(--muted);">Certified</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE PERKS FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Mobile</strong> / Perks — 390 × 844</div>
+      <div class="frame-outer">
+        <div class="mobile-wrapper">
+          <div class="mobile-inner w" style="display:flex;flex-direction:column;">
+            <div class="m-nav">
+              <div class="m-logo">
+                <div class="m-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="m-logo-text">CS INDUSTRY CERT</span>
+              </div>
+              <div class="m-burger"><span></span><span></span><span></span></div>
+            </div>
+            <div class="m-perks">
+              <div class="m-eyebrow">Why Join</div>
+              <div class="m-sec-title">THE PERKS OF<br><em>THIS PATHWAY</em></div>
+              <div class="m-perk-rows">
+                <div class="m-perk-row">
+                  <div class="m-perk-icon">🏅</div>
+                  <div>
+                    <div class="m-perk-title">Competitive Events</div>
+                    <p class="m-perk-desc">Compete at Regional, State, and National level in CS-related FBLA events.</p>
+                  </div>
+                </div>
+                <div class="m-perk-row">
+                  <div class="m-perk-icon">👥</div>
+                  <div>
+                    <div class="m-perk-title">Leadership Development</div>
+                    <p class="m-perk-desc">Officer positions, event planning, and real-world team skills.</p>
+                  </div>
+                </div>
+                <div class="m-perk-row">
+                  <div class="m-perk-icon">📋</div>
+                  <div>
+                    <div class="m-perk-title">College Edge</div>
+                    <p class="m-perk-desc">FBLA awards and AP credentials stand out on every application.</p>
+                  </div>
+                </div>
+              </div>
+              <div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin:20px 0 10px;font-weight:500;">Industry Credentials</div>
+              <div class="m-cert-strip">
+                <div class="m-cert-badge">
+                  <div class="m-badge-icon">🎓</div>
+                  <div class="m-badge-name">AP College Credit</div>
+                  <div class="m-badge-org">College Board</div>
+                </div>
+                <div class="m-cert-badge">
+                  <div class="m-badge-icon">🏆</div>
+                  <div class="m-badge-name">STEM Certified</div>
+                  <div class="m-badge-org">National</div>
+                </div>
+                <div class="m-cert-badge">
+                  <div class="m-badge-icon">🛡️</div>
+                  <div class="m-badge-name">CTAE Pathway</div>
+                  <div class="m-badge-org">Georgia State</div>
+                </div>
+                <div class="m-cert-badge">
+                  <div class="m-badge-icon">💼</div>
+                  <div class="m-badge-name">Career Ready</div>
+                  <div class="m-badge-org">Industry</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /frames-row -->
+
+  <!-- ROW 4: APPLY FRAMES -->
+  <div class="canvas-section-label">Apply Section — Desktop &amp; Mobile</div>
+  <div class="frames-row">
+
+    <!-- DESKTOP APPLY FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Desktop</strong> / Apply — 1440 × 900</div>
+      <div class="frame-outer">
+        <div class="desktop-wrapper">
+          <div class="desktop-inner w" style="display:flex;flex-direction:column;">
+            <div class="d-nav">
+              <div class="d-nav-logo">
+                <div class="d-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="d-logo-text">CS INDUSTRY CERTIFICATION</span>
+              </div>
+              <div class="d-nav-links">
+                <span class="d-link">About</span>
+                <span class="d-link">Courses</span>
+                <span class="d-link">Perks</span>
+                <span class="d-link d-apply">Apply</span>
+              </div>
+            </div>
+            <div class="d-apply-section">
+              <div class="d-eyebrow">Get Started</div>
+              <div class="d-section-title">JOIN THE<br><em>CS PATHWAY</em></div>
+              <div class="d-section-sub">Ready to build real skills and earn real credentials? Start here.</div>
+              <div class="d-apply-layout">
+                <!-- Left: teacher + contact info -->
+                <div class="d-apply-left">
+                  <div class="d-teacher-card">
+                    <div class="d-teacher-av">DJ</div>
+                    <div>
+                      <div class="d-teacher-name">Mrs. Daphne John</div>
+                      <div class="d-teacher-role">CS Pathway Instructor · FCHS</div>
+                      <p class="d-teacher-bio">Guiding students from digital foundations through advanced Java — and into college and career success in tech.</p>
+                    </div>
+                  </div>
+                  <div class="d-info-chips">
+                    <div class="d-chip">
+                      <span class="d-chip-icon">📍</span>
+                      131 Almon C. Hill Drive, Cumming, GA 30040
+                    </div>
+                    <div class="d-chip">
+                      <span class="d-chip-icon">📞</span>
+                      770-887-8151
+                    </div>
+                    <div class="d-chip">
+                      <span class="d-chip-icon">🕐</span>
+                      Mon – Fri · 8:25 AM – 3:40 PM
+                    </div>
+                    <div class="d-chip">
+                      <span class="d-chip-icon">🌐</span>
+                      forsyth.k12.ga.us · CS Pathway
+                    </div>
+                  </div>
+                  <!-- STEM certified bar -->
+                  <div style="margin-top:24px;padding:18px 20px;background:rgba(200,16,46,0.07);border:1px solid rgba(200,16,46,0.18);border-radius:8px;display:flex;align-items:center;gap:14px;">
+                    <div style="font-size:28px;">⭐</div>
+                    <div>
+                      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.05em;">AdvancEd Nationally Certified STEM School</div>
+                      <div style="font-size:12px;color:var(--muted);font-weight:300;">One of ~32 in the US · Certified 2018</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Right: Apply form -->
+                <div class="d-form-panel">
+                  <div class="d-form-label">Application</div>
+                  <div class="d-form-title">EXPRESS INTEREST</div>
+                  <p class="d-form-sub">Fill this out and Mrs. John will reach out with next steps for enrolling in the CS Pathway.</p>
+                  <div class="d-field-row">
+                    <div class="d-field">
+                      <div class="d-field-label">First Name</div>
+                      <div class="d-field-input" style="color:rgba(255,255,255,0.2);">e.g. Alex</div>
+                    </div>
+                    <div class="d-field">
+                      <div class="d-field-label">Last Name</div>
+                      <div class="d-field-input" style="color:rgba(255,255,255,0.2);">e.g. Smith</div>
+                    </div>
+                  </div>
+                  <div class="d-field">
+                    <div class="d-field-label">Student Email</div>
+                    <div class="d-field-input" style="color:rgba(255,255,255,0.2);">yourname@forsyth.k12.ga.us</div>
+                  </div>
+                  <div class="d-field">
+                    <div class="d-field-label">Current Grade</div>
+                    <div class="d-field-input" style="color:rgba(255,255,255,0.2);">Select grade level →</div>
+                  </div>
+                  <div class="d-field">
+                    <div class="d-field-label">Which course are you interested in?</div>
+                    <div class="d-field-input" style="color:rgba(255,255,255,0.2);">Select a course →</div>
+                  </div>
+                  <div class="d-submit">SUBMIT APPLICATION →</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE APPLY FRAME -->
+    <div class="frame-block">
+      <div class="frame-label"><strong>Mobile</strong> / Apply — 390 × 844</div>
+      <div class="frame-outer">
+        <div class="mobile-wrapper">
+          <div class="mobile-inner w" style="display:flex;flex-direction:column;">
+            <div class="m-nav">
+              <div class="m-logo">
+                <div class="m-logo-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <path d="M12 2C10 5 8 7 8 10a4 4 0 008 0c0-3-2-5-4-8z"/>
+                    <line x1="12" y1="14" x2="12" y2="22"/>
+                    <line x1="9" y1="20" x2="15" y2="20"/>
+                  </svg>
+                </div>
+                <span class="m-logo-text">CS INDUSTRY CERT</span>
+              </div>
+              <div class="m-burger"><span></span><span></span><span></span></div>
+            </div>
+            <div class="m-apply">
+              <div class="m-eyebrow">Get Started</div>
+              <div class="m-sec-title">JOIN THE<br><em>CS PATHWAY</em></div>
+              <div class="m-teacher-card">
+                <div class="m-teacher-av">DJ</div>
+                <div>
+                  <div class="m-teacher-name">Mrs. Daphne John</div>
+                  <div class="m-teacher-role">CS Pathway Instructor</div>
+                  <p style="font-size:10px;color:var(--muted);font-weight:300;margin-top:4px;line-height:1.5;">Room 334 · 770-887-8151</p>
+                </div>
+              </div>
+              <div class="m-form-panel">
+                <div class="m-form-title">EXPRESS INTEREST</div>
+                <p class="m-form-sub">Fill this out and Mrs. John will reach out with next steps for enrollment.</p>
+                <div class="m-field">
+                  <div class="m-field-label">Full Name</div>
+                  <div class="m-field-input" style="color:rgba(255,255,255,0.2);">Your name</div>
+                </div>
+                <div class="m-field">
+                  <div class="m-field-label">Student Email</div>
+                  <div class="m-field-input" style="color:rgba(255,255,255,0.2);">yourname@forsyth.k12.ga.us</div>
+                </div>
+                <div class="m-field">
+                  <div class="m-field-label">Grade Level</div>
+                  <div class="m-field-input" style="color:rgba(255,255,255,0.2);">Select grade →</div>
+                </div>
+                <div class="m-field">
+                  <div class="m-field-label">Course Interest</div>
+                  <div class="m-field-input" style="color:rgba(255,255,255,0.2);">Select course →</div>
+                </div>
+                <div class="m-submit">SUBMIT APPLICATION →</div>
+              </div>
+              <div style="margin-top:16px;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:8px;">
+                <div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Contact</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.8;font-weight:300;">
+                  📍 131 Almon C. Hill Drive, Cumming GA 30040<br>
+                  📞 770-887-8151<br>
+                  🕐 Mon–Fri · 8:25 AM – 3:40 PM
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /frames-row -->
+
+</div><!-- /canvas -->
+</body>
+</html>
